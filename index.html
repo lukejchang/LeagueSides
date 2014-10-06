@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html >
+<!--HTML page for LeagueSides by JIn-li Chang -->
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script type="text/javascript" src="sides.js"></script>
+    <title>Purple side sux</title>
+</head>
+<body ng-app="sides" ng-controller="sidesCtrl">
+<form ng-submit="getgames()" ng-init="init()">
+    <label>Summoner name: </label>
+    <input type="text" id="sum" ng-model="sum">
+    <label>Region:</label>
+    <select id="reg" ng-model="reg" ng-options="r for r in regions"></select>
+    <button type="submit">Get stuff</button>
+    <div ng-show="!error && !nogames && haveData" id="data">
+        The past {{games.length}} games for {{name}}:
+        <table>
+            <tr>
+                <td>Game type</td>
+                <th class="b">Blue W</th>
+                <th class="b">Blue L</th>
+                <th class="p">Purple W</th>
+                <th class="p">Purple L</th>
+                <th class="b">Blue Kills</th>
+                <th class="b">Blue Deaths</th>
+                <th class="b">Blue Assists</th>
+                <th class="p">Purple Kills</th>
+                <th class="p">Purple Deaths</th>
+                <th class="p">Purple Assists</th>
+            </tr>
+            <tr ng-repeat="(type, data) in stats | orderBy: Order">
+                <td class="gameType">{{type}}</td>
+                <td class="b">{{data.Blue.Win}}</td>
+                <td class="b">{{data.Blue.Loss}}</td>
+                <td class="p">{{data.Purple.Win}}</td>
+                <td class="p">{{data.Purple.Loss}}</td>
+                <td class="b">{{data.Blue.Kills}}</td>
+                <td class="b">{{data.Blue.Deaths}}</td>
+                <td class="b">{{data.Blue.Assists}}</td>
+                <td class="p">{{data.Purple.Kills}}</td>
+                <td class="p">{{data.Purple.Deaths}}</td>
+                <td class="p">{{data.Purple.Assists}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-show="error && !nogames && !haveData" id="error">This service is currently down. Please try again later.</div>
+    <div ng-show="!error && nogames && !haveData" id="nogames">No games found for summoner {{name}}</div>
+</form>
+</body>
+</html>
