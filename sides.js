@@ -19,7 +19,7 @@ sides.controller('sidesCtrl', function($scope, $http){
         $scope.error = false;
         $scope.name = $scope.sum;
         $scope.region = $scope.reg;
-        $http.get('students.washington.edu/jlchang/LeagueSides/data.php?sum=' + $scope.name + '&region=' + $scope.region)
+        $http.get('http://students.washington.edu/jlchang/LeagueSides/data.php?sum=' + $scope.name + '&region=' + $scope.region)
             .success(function(data){
                 $scope.process(data);
             })
