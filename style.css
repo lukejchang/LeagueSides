@@ -1,0 +1,35 @@
+/* CSS Stylesheet for LeagueSides by Jin-li Chang */
+
+body{
+    text-align: center;
+}
+
+#data, #error, #nogames{
+    margin: 10px;
+}
+
+table, th, td{
+    text-align: center;
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 25%;
+}
+
+table{
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th{
+    font-weight: bold;
+}
+
+.b{
+    color: blue;
+}
+
+.p{
+    color: purple;
+}

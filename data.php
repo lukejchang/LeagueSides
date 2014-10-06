@@ -1,23 +1,20 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: JChang
- * Date: 10/3/2014
- * Time: 12:57 AM
- */
+/*LeagueSides - php backend for fetching data by Jin-li Chang */
+if(isset($_GET["sum"]) && isset($_GET["region"])){
+    $sum = $_GET["sum"];
+    $reg = $_GET["region"];
 
-//pulling game data from the riot api
+    $key = '?api_key=fe47db54-a104-45af-97ae-4128f3b16b07';
 
-$url=urlencode('https://na.api.pvp.net/');
+    //get summoner ID from summoner name
+    $sumurl = 'https://na.api.pvp.net/api/lol/'.$reg.'/v1.4/summoner/by-name/'.$sum;
+    $summoner = json_decode(file_get_contents($sumurl.$key), true);
+    $sumid = $summoner[$sum]["id"];
 
-$key = 'fe47db54-a104-45af-97ae-4128f3b16b07';
+    $gameurl='https://na.api.pvp.net/api/lol/'.$reg.'/v1.3/game/by-summoner/'.$sumid.'/recent';
+    $games = file_get_contents($gameurl.$key);
 
-$summoner = 'walkemskies';
+    echo $games;
+}
 
-$curl = curl_init($url + 'api/lol/NA/v1.3/game/by-summoner/' + $summoner + '/recent');
 
-$result = curl_exec($curl);
-
-echo "HEY";
-
-echo $result;
